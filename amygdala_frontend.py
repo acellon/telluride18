@@ -214,8 +214,8 @@ class JoyDetector(object):
                         # Every other frame, output score
                         if (i % 2):
                             bd_sock.send(str(joy_score))
-                            if verbose:
-                                print("joy: " + str(joy_score))
+                            #if verbose:
+                            print("joy: " + str(joy_score))
 
                         if self._done.is_set() or i == num_frames:
                             break
