@@ -233,7 +233,7 @@ def main():
     parser.add_argument('--num_frames', '-n', type=int, dest='num_frames', default=-1,
         help='Number of frames to run for, -1 to not terminate')
     parser.add_argument('--bluetooth_addr', '-bda',
-        dest='BD_ADDR', default="B8:27:EB:72:31:96",
+        dest='BD_ADDR', default="B4:AE:2B:E2:72:A5",
         help="Bluetooth address to send data to")
     parser.add_argument('--bluetooth_port', '-bdp', type=int,
         dest="BD_PORT", default=1, help="Bluetooth port to send out data on")
