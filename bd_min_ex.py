@@ -1,4 +1,4 @@
-# Communication Channel
+# Minimum working example of connecting PyBluez into Nengo
 
 import numpy as np
 import nengo
@@ -54,5 +54,3 @@ sim.run(20, progress_bar=False)
 
 client_socket.close()
 server_socket.close()
-
-

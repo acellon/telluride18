@@ -1,4 +1,5 @@
 #!/bin/sh
+# Shell script to configure Pi Zero from AIY kit for Bluetooth/PyBluez
 
 echo "Installing dependencies and libraries..."
 apt-get install bluetooth libbluetooth3 libboost-python-dev libboost-thread-dev libbluetooth-dev libglib2.0-dev python-dev python-bluez

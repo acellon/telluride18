@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 
-"""Basic AIY-based amygdala frontend."""
+# Basic AIY-based amygdala model frontend - sends joy score from AIY to Nengo
+# via Bluetooth.
+
 import argparse
 import collections
 import io
