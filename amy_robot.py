@@ -283,7 +283,7 @@ with model:
         '''
         try:
             data = client_socket.recv(bd_size)
-            data = -2 * float(data) + 1
+            data = float(data)
             #print("tried")
             print(data)
         except:
@@ -373,26 +373,26 @@ with model:
         if (happy > 0.6):
             output = 1
             
-        if (sad > 0.6):
+        if (distressed > 0.6):
             output = -1
             
         now = timeit.default_timer()
         motor1 = 0
-        motor2 = 2
-        headMotor = 1
+        motor2 = 1
+        #headMotor = 1
         if now > last_time + 0.1:
-            if (output > 0.6):
-                link.write('/sys/class/tacho-motor/motor%d/speed_sp' % motor1, '100')
+            if (output == 1):
+                link.write('/sys/class/tacho-motor/motor%d/speed_sp' % motor1, '120')
                 link.write('/sys/class/tacho-motor/motor%d/command' % motor1, 'run-forever')
                 
-                link.write('/sys/class/tacho-motor/motor%d/speed_sp' % motor2, '100')
+                link.write('/sys/class/tacho-motor/motor%d/speed_sp' % motor2, '120')
                 link.write('/sys/class/tacho-motor/motor%d/command' % motor2, 'run-forever')
                 
-            elif(output < 0.2):
-                link.write('/sys/class/tacho-motor/motor%d/speed_sp' % motor1, '-100')
+            elif(output == -1):
+                link.write('/sys/class/tacho-motor/motor%d/speed_sp' % motor1, '-120')
                 link.write('/sys/class/tacho-motor/motor%d/command' % motor1, 'run-forever')
                 
-                link.write('/sys/class/tacho-motor/motor%d/speed_sp' % motor2, '-100')
+                link.write('/sys/class/tacho-motor/motor%d/speed_sp' % motor2, '-120')
                 link.write('/sys/class/tacho-motor/motor%d/command' % motor2, 'run-forever')
             else:
                 link.write('/sys/class/tacho-motor/motor%d/speed_sp' % motor1, '0')
@@ -401,8 +401,8 @@ with model:
                 link.write('/sys/class/tacho-motor/motor%d/speed_sp' % motor2, '0')
                 link.write('/sys/class/tacho-motor/motor%d/command' % motor2, 'run-forever')
             last_time = now 
-            link.write('/sys/class/tacho-motor/motor%d/speed_sp' % headMotor, '0')
-            link.write('/sys/class/tacho-motor/motor%d/command' % headMotor, 'run-forever')
+            #link.write('/sys/class/tacho-motor/motor%d/speed_sp' % headMotor, '0')
+            #link.write('/sys/class/tacho-motor/motor%d/command' % headMotor, 'run-forever')
     
         return output
     
@@ -421,7 +421,7 @@ with model:
 
 
 sim = nengo.Simulator(model)
-sim.run(60, progress_bar=False)
+sim.run(20, progress_bar=False)
 
 client_socket.close()
 server_socket.close()

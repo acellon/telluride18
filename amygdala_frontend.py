@@ -213,9 +213,13 @@ class JoyDetector(object):
 
                         # Every other frame, output score
                         if (i % 2):
-                            bd_sock.send(str(joy_score))
+                            if len(faces) > 0:
+                                bd_out = -2 * joy_score + 1
+                            else:
+                                bd_out = -0.09
+                            bd_sock.send(str(bd_out))
                             #if verbose:
-                            print("joy: " + str(joy_score))
+                            print("Value to Nengo: " + str(bd_out))
 
                         if self._done.is_set() or i == num_frames:
                             break

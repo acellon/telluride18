@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import nengo
 import numpy as np
 import nengo_spa
@@ -9,7 +11,11 @@ if not hasattr(ev3_nengo, 'link'):
     ev3_nengo.link = ev3_nengo.ev3link.EV3Link('10.0.0.3')
 link = ev3_nengo.link
 
-print(link.dir('/sys/class/tacho-motor'))
+check = link.dir('/sys/class/tacho-motor')
+
+
+print(check)
+
 
 for i in range(0,3):
     link.write('/sys/class/tacho-motor/motor%d/speed_sp' % i, '0')
