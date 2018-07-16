@@ -170,6 +170,8 @@ class JoyDetector(object):
         self._done.set()
 
     def run(self, bd_sock, num_frames, verbose):
+        """@Timmer, this is the function where we send out data via Bluetooth
+         (or REDIS)."""
         logger.info('Starting...')
         leds = Leds()
         player = Player(gpio=22, bpm=10)
@@ -211,11 +213,16 @@ class JoyDetector(object):
 
                         prev_joy_score = joy_score
 
-                        # Every other frame, output score
-                        if (i % 2):
-                            bd_sock.send(str(joy_score))
+                        # Every num_frames frames, output score via Bluetooth, redis, etc.
+                        num_frames = 2
+                        if (i % num_frames):
+                            if len(faces) > 0:
+                                bd_out = -2 * joy_score + 1
+                            else:
+                                bd_out = -0.09
+                            bd_sock.send(str(bd_out))
                             if verbose:
-                                print("joy: " + str(joy_score))
+                                print("Value sent to Nengo: " + str(bd_out))
 
                         if self._done.is_set() or i == num_frames:
                             break
