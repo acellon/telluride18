@@ -1,3 +1,4 @@
+# Bluetooth client to connect to Andreas's AIY
 
 import bluetooth
 
@@ -11,4 +12,3 @@ sock.connect((bd_addr, port))
 sock.send("hello!!")
 
 sock.close()
-

@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 
-"""Basic AIY-based amygdala frontend."""
+# Basic AIY-based amygdala model frontend - sends joy score from AIY to Nengo
+# via Bluetooth.
+
 import argparse
 import collections
 import io
@@ -221,7 +223,8 @@ class JoyDetector(object):
                             else:
                                 bd_out = -0.09
                             bd_sock.send(str(bd_out))
-                            if verbose:
+
+                           if verbose:
                                 print("Value sent to Nengo: " + str(bd_out))
 
                         if self._done.is_set() or i == num_frames:
